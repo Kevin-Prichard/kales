@@ -10,17 +10,17 @@ class Kales(object):
 
     def _request(self, content, content_type, external_id, **kwargs):
         headers = {
-            "x-calais-licenseID": self.api_key,
+            "X-AG-Access-Token": self.api_key,
             "content-type": content_type,
             "externalID": external_id,
-            "accept": "application/json",
+            "outputformat": "application/json",
             "enableMetadataType": "SocialTags",
             "calculateRelevanceScore": "true",
             "allowDistribution": "false",
             "allowSearch": "false"
         }
         headers.update(kwargs)
-        return requests.post("http://api.opencalais.com/tag/rs/enrich",
+        return requests.post("https://api.thomsonreuters.com/permid/calais",
             data=content, headers=headers)
 
     def analyze(self, content, content_type="text/raw", external_id=None, **kwargs):
